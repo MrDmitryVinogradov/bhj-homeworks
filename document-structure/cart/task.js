@@ -26,13 +26,12 @@ for (let i = 0; i < products.length; i++) {
         itemInCart.querySelector('.cart__product-image').setAttribute('src', products[i].querySelector('.product__image').getAttribute('src'));
         itemInCart.querySelector('.cart__product-count').innerText = quantity;
         let productsInCart = Array.from(document.querySelectorAll('.cart__product'));
-        if (!productsInCart.find(element => element.getAttribute('data-id') === id)) {
+        let checkProduct = productsInCart.find(element => element.getAttribute('data-id') === id);
+        if (!checkProduct) {
             cart.appendChild(itemInCart);
         }
         else {
-            let itemToChange = productsInCart.find(element => element.getAttribute('data-id') === id);
-            console.log(itemToChange);
-            itemToChange.querySelector('.cart__product-count').innerText = Number(itemToChange.querySelector('.cart__product-count').innerText) + quantity;
+            checkProduct.querySelector('.cart__product-count').innerText = Number(checkProduct.querySelector('.cart__product-count').innerText) + quantity;
             quantity = 1;
         }
         products[i].querySelector('.product__quantity-value').textContent = 1;
