@@ -7,10 +7,10 @@ form.onsubmit = function () {
         let formData = new FormData(document.forms.form);
         let request = new XMLHttpRequest();
         request.open('POST', 'https://netology-slow-rest.herokuapp.com/upload.php');
-        request.send(formData);
-        request.addEventListener('progress', function (e) {
-            progressBar.value = (e.loaded / 99478529).toFixed(2);
+        request.upload.addEventListener('progress', function (e) {
+            progressBar.value = (e.loaded / e.total);
             console.log(e.loaded);
-        })
-    }
+        });
+        request.send(formData);
+    };
 };
