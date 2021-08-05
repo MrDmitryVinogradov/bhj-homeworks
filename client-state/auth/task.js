@@ -1,6 +1,16 @@
 let signIn = document.querySelector('.signin');
 let welcome = document.querySelector('.welcome');
-signIn.classList.add('signin_active');
+let id;
+if (localStorage.getItem('auth') !== 'yes') {
+    signIn.classList.add('signin_active');
+}
+
+if (localStorage.getItem('auth') === "yes") {
+    welcome.classList.add('welcome_active');
+    id = localStorage.getItem('user_id');
+    welcome.querySelector('#user_id').textContent = id;
+}
+
 let signInForm = document.forms.signin__form;
 let formInputs = Array.from(document.querySelectorAll('.control'));
 let button = document.querySelector('.btn');
@@ -22,6 +32,8 @@ signInForm.addEventListener('submit', function (e) {
                     signIn.classList.remove('signin_active');
                     welcome.classList.add('welcome_active');
                     welcome.querySelector('#user_id').textContent = response.user_id;
+                    localStorage.setItem('auth', 'yes');
+                    localStorage.setItem('user_id', response.user_id);
                 }
             }
         }
